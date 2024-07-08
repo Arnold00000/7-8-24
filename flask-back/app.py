@@ -18,8 +18,12 @@ from flask_marshmallow import Marshmallow
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-app.config["SECRET_KEY"] = "cairocoders-ednalan"
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:" "@localhost/flaskreact"
+# app.config["SECRET_KEY"] = "cairocoders-ednalan"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:" "@localhost/flaskreact"
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "mysql+pymsql://1234!@#$@localhost:root@localhost:3306/userdatadb"
+)
+app.config["SECRET_KEY"] = "39a8472e8fa391fc"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True

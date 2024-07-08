@@ -2,10 +2,10 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Header from './components/Header';
-import Profile from './components/Profile';
-import useToken from './components/useToken';
+import Login from './pages/Login';
+import Header from './pages/Header';
+import Profile from './pages/Profile';
+import useToken from './pages/useToken';
 import ListUserPage from "./pages/ListUserPage";
 import CreateUser from './pages/CreateUser';
 import EditUser from './pages/EditUser';
