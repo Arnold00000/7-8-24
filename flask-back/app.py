@@ -1,3 +1,48 @@
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+import datetime
+
+app = Flask(__name__)
+
+# Database configuration
+app.config["SQLALchemy_DATABASE_URI"] = "mysql+pymysql://root:Yes@localhost/userdatadb"
+app.config["SQLALchemy_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+
+class Users(db.Model):
+    __tablename__ = "admins"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    date = db.Column(db.DateTime, default=datetime.datetime.now)
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+
+@app.route("/")
+def home():
+    return "<p>Homess</p>"
+
+
+@app.route("/useradd", methods=["POST"])
+def useradd():
+    name = request.json["name"]
+    email = request.json["email"]
+
+    admins = Users(name, email)
+    db.session.add(admins)
+    db.session.commit()
+
+    return jsonify({"success": "Success post"})
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
 # # C:\flask_dev\flaskreact\app.py
 # import json
 # from flask import Flask, request, jsonify
@@ -28,28 +73,28 @@
 # # app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # # app.config["SQLALCHEMY_ECHO"] = True
 
-# # jwt = JWTManager(app)
-# # bcrypt = Bcrypt(app)
-# # db = SQLAlchemy(app)
-# # ma = Marshmallow(app)
+# jwt = JWTManager(app)
+# bcrypt = Bcrypt(app)
+# db = SQLAlchemy(app)
+# ma = Marshmallow(app)
 
 
-# # class User(db.Model):
-# #     __tablename__ = "users"
-# #     id = db.Column(db.Integer, primary_key=True)
-# #     name = db.Column(db.String(100))
-# #     email = db.Column(db.String(100), unique=True)
-# #     password = db.Column(db.Text, nullable=False)
-# #     about = db.Column(db.Text, nullable=False, default="")
+# class User(db.Model):
+#     __tablename__ = "users"
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(100))
+#     email = db.Column(db.String(100), unique=True)
+#     password = db.Column(db.Text, nullable=False)
+#     about = db.Column(db.Text, nullable=False, default="")
 
 
-# # class UserSchema(ma.Schema):
-# #     class Meta:
-# #         fields = ("id", "name", "email", "about", "date")
+# class UserSchema(ma.Schema):
+#     class Meta:
+#         fields = ("id", "name", "email", "about", "date")
 
 
-# # user_schema = UserSchema()
-# # users_schema = UserSchema(many=True)
+# user_schema = UserSchema()
+# users_schema = UserSchema(many=True)
 
 
 # @app.route("/")
