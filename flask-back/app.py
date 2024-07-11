@@ -9,7 +9,7 @@ ma = Marshmallow(app)
 
 # Databse configuration                                  Username:password@hostname/databasename
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "mysql+pymysql://root:qwertyui@localhost/userdatadb"
+    "mysql+pymysql://root:''@localhost/userdatadb"
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
