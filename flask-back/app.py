@@ -2,17 +2,19 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 
 
 app = Flask(__name__)
-ma = Marshmallow(app)
+CORS(app)
 
 # Databse configuration                                  Username:password@hostname/databasename
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "mysql+pymysql://root:''@localhost/userdatadb"
+    "mysql+pymysql://root:@localhost/userdatadb"
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 
 class Users(db.Model):
@@ -36,9 +38,9 @@ user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
 
-@app.route("/")
-def home():
-    return "<p>Home</p>"
+# @app.route("/")
+# def home():
+#     return "<p>Home</p>"
 
 
 @app.route("/listusers", methods=["GET"])
@@ -86,3 +88,7 @@ def useradd():
     db.session.commit()
 
     return user_schema.jsonify(users)
+
+
+if __name__=='__main__':
+    app.run(debug=True)
