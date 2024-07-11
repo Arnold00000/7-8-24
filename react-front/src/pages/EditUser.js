@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "./EditUser.css";
 
 export default function EditUser() {
   const navigate = useNavigate();
