@@ -6,18 +6,12 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-<<<<<<< HEAD
 
 CORS(app)
-ma = Marshmallow(app)
-=======
-CORS(app)
->>>>>>> 26f4bb33317881bfa598af6135c7f5a4f1015134
+
 
 # Databse configuration                                  Username:password@hostname/databasename
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "mysql+pymysql://root:@localhost/userdatadb"
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:"qwertyui"@localhost/userdatadb"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -96,5 +90,5 @@ def useradd():
     return user_schema.jsonify(users)
 
 
-if __name__=='__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
